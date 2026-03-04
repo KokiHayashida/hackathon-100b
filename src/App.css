@@ -101,12 +101,22 @@
   color: var(--accent);
 }
 
+/* 消費スピードタブ (3番目) → ティール */
+.nav-tabs .nav-tab:nth-child(3):not(.nav-tab--active):hover { color: var(--teal); }
+.nav-tabs .nav-tab:nth-child(3).nav-tab--active             { color: var(--teal); }
+.nav-tabs .nav-tab:nth-child(3).nav-tab--active::after      { background-color: var(--teal); }
+
+/* 現実比較タブ (4番目) → パープル */
+.nav-tabs .nav-tab:nth-child(4):not(.nav-tab--active):hover { color: var(--purple); }
+.nav-tabs .nav-tab:nth-child(4).nav-tab--active             { color: var(--purple); }
+.nav-tabs .nav-tab:nth-child(4).nav-tab--active::after      { background-color: var(--purple); }
+
 /* ========================================
    View Container
    ======================================== */
 
 .view-container {
-  animation: fadeIn 0.28s ease-out both;
+  animation: fadeIn 0.5s ease-out both;
 }
 
 .view-card {
@@ -137,6 +147,32 @@
   text-align: center;
 }
 
+/* stagger: ヒーロー直下の子を1つずつ登場 */
+.home-hero > *:nth-child(1) {
+  animation: staggerFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.1s;
+}
+.home-hero > *:nth-child(2) {
+  animation: staggerFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.28s;
+}
+.home-hero > *:nth-child(3) {
+  animation: staggerFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.48s;
+}
+.home-hero > *:nth-child(4) {
+  animation: staggerFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.64s;
+}
+.home-hero > *:nth-child(5) {
+  animation-name: staggerFadeUp, ctaFloat;
+  animation-duration: 0.75s, 4.5s;
+  animation-delay: 0.8s, 2.5s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1), ease-in-out;
+  animation-fill-mode: both, none;
+  animation-iteration-count: 1, infinite;
+}
+
 .home-hero-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -144,8 +180,9 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent);
-  border: 1px solid var(--accent-border);
+  color: #07101e;
+  background-color: var(--accent);
+  border: none;
   border-radius: 100px;
   padding: 0.28rem 0.9rem;
   margin-bottom: 2rem;
@@ -159,12 +196,17 @@
   line-height: 1;
   margin-bottom: 0.75rem;
   font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 60px rgba(232, 162, 25, 0.25);
+}
+
+.home-hero-display-yen {
+  color: var(--teal);
 }
 
 .home-hero h2 {
   font-size: clamp(1.2rem, 3.5vw, 1.6rem);
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-weight: 700;
+  color: var(--text-primary);
   margin: 0 0 1.4rem;
   letter-spacing: -0.02em;
 }
@@ -199,6 +241,7 @@
   border: none;
   transform: translateY(-2px);
   box-shadow: 0 6px 22px rgba(232, 162, 25, 0.32);
+  animation-play-state: running, paused;
 }
 
 .home-cta:focus-visible {
@@ -249,8 +292,11 @@
 
 .home-sub-cards .home-sub-card:nth-child(1) { border-left-color: var(--teal); }
 .home-sub-cards .home-sub-card:nth-child(1):hover { border-left-color: var(--teal); }
+.home-sub-cards .home-sub-card:nth-child(1) h3 { color: var(--teal); }
+
 .home-sub-cards .home-sub-card:nth-child(2) { border-left-color: var(--purple); }
 .home-sub-cards .home-sub-card:nth-child(2):hover { border-left-color: var(--purple); }
+.home-sub-cards .home-sub-card:nth-child(2) h3 { color: var(--purple); }
 
 .home-sub-card h3 {
   margin: 0 0 0.35rem;
@@ -342,10 +388,15 @@
   text-transform: uppercase;
 }
 
-/* Q1/Q2/Q3 それぞれに固有色 */
+/* Q1/Q2/Q3 それぞれに固有色 (番号 + ブロック左ボーダー) */
 .diagnose-form .question-block:nth-child(1) .question-number { color: var(--teal); }
+.diagnose-form .question-block:nth-child(1) { border-left: 3px solid var(--teal); }
+
 .diagnose-form .question-block:nth-child(2) .question-number { color: var(--blue); }
+.diagnose-form .question-block:nth-child(2) { border-left: 3px solid var(--blue); }
+
 .diagnose-form .question-block:nth-child(3) .question-number { color: var(--purple); }
+.diagnose-form .question-block:nth-child(3) { border-left: 3px solid var(--purple); }
 
 .question-text {
   margin: 0 0 1.1rem;
@@ -493,7 +544,7 @@
   background-color: var(--surface-1);
   border: 1px solid var(--border-strong);
   text-align: center;
-  animation: scaleIn 0.35s ease-out both;
+  animation: scaleIn 0.6s ease-out both;
   box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
@@ -543,6 +594,11 @@
   border: none;
 }
 
+.result--teal   .result-card-divider { background-color: var(--teal); }
+.result--blue   .result-card-divider { background-color: var(--blue); }
+.result--purple .result-card-divider { background-color: var(--purple); }
+.result--amber  .result-card-divider { background-color: var(--accent); }
+
 .result-actions {
   margin-top: 1.5rem;
   display: flex;
@@ -569,6 +625,16 @@
 .copy-button:hover {
   color: var(--text-primary);
   border-color: var(--accent);
+}
+
+.copy-button--copied {
+  color: var(--emerald);
+  border-color: var(--emerald-border);
+}
+
+.copy-button--copied:hover {
+  color: var(--emerald);
+  border-color: var(--emerald);
 }
 
 /* Result card — type color variants */
@@ -648,8 +714,8 @@
   align-items: center;
   gap: 1rem;
   font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text-muted);
+  font-weight: 600;
+  color: var(--orange);
 }
 
 .field-separator::before,
@@ -679,8 +745,8 @@
 }
 
 .preset-button:hover {
-  color: var(--accent);
-  border-color: var(--accent-border);
+  color: var(--blue);
+  border-color: var(--blue-border);
   background-color: var(--surface-2);
 }
 
@@ -694,8 +760,8 @@
 
 .speed-result-unit {
   font-size: 0.9rem;
-  font-weight: 400;
-  color: var(--text-secondary);
+  font-weight: 600;
+  color: var(--orange);
   margin-left: 0.25rem;
 }
 
@@ -739,8 +805,13 @@
 }
 
 .compare-item:nth-child(1) .compare-big-number { color: var(--teal); }
+.compare-item:nth-child(1) h3                  { color: var(--teal); }
+
 .compare-item:nth-child(2) .compare-big-number { color: var(--blue); }
+.compare-item:nth-child(2) h3                  { color: var(--blue); }
+
 .compare-item:nth-child(3) .compare-big-number { color: var(--purple); }
+.compare-item:nth-child(3) h3                  { color: var(--purple); }
 
 .compare-big-unit {
   font-size: 0.85rem;

@@ -222,8 +222,12 @@ export default function TypeDiagnose() {
           <hr className="result-card-divider" />
           <p>{result.description}</p>
           <div className="result-actions">
-            <button type="button" className="copy-button" onClick={handleCopy}>
-              {copied ? 'コピーしました' : '結果をコピー'}
+            <button
+              type="button"
+              className={`copy-button${copied ? ' copy-button--copied' : ''}`}
+              onClick={handleCopy}
+            >
+              {copied ? '✓ コピーしました' : '結果をコピー'}
             </button>
           </div>
         </div>

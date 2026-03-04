@@ -52,7 +52,7 @@ function App() {
 
       <main className="view-container" key={selectedView}>
         {selectedView === 'home' && (
-          <div className="fade-in">
+          <div>
             <div className="home-hero">
               <span className="home-hero-eyebrow">Main Feature</span>
               <div className="home-hero-display">¥100億円</div>
@@ -70,7 +70,7 @@ function App() {
               </button>
             </div>
 
-            <div className="home-sub-section">
+            <div className="home-sub-section fade-in">
               <p className="home-sub-label">Other Modes</p>
               <div className="home-sub-cards">
                 <div
