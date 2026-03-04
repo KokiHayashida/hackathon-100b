@@ -36,21 +36,25 @@ const TYPE_PROFILES = {
     name: '社会貢献リーダー型',
     description:
       '寄付や社会課題の解決に強い関心があり、お金を通じて世界を良くしたいタイプです。',
+    colorClass: 'result--teal',
   },
   global_investor: {
     name: '世界投資家型',
     description:
       '投資や事業に積極的で、100億円をさらに増やしながらインパクトを出したいタイプです。',
+    colorClass: 'result--blue',
   },
   luxury_creator: {
     name: '自由クリエイター型',
     description:
       '自分や家族の豊かな生活、クリエイティブな体験を重視するタイプです。',
+    colorClass: 'result--purple',
   },
   balanced_planner: {
     name: 'バランス設計者型',
     description:
       '社会貢献・投資・生活のバランスを取りながら、長期的に安定した未来を描くタイプです。',
+    colorClass: 'result--amber',
   },
 }
 
@@ -105,6 +109,10 @@ export default function TypeDiagnose() {
   const [answers, setAnswers] = useState({})
   const [result, setResult] = useState(null)
   const [hasSubmitted, setHasSubmitted] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  const answeredCount = Object.keys(answers).length
+  const progressPercent = (answeredCount / questions.length) * 100
 
   const handleChange = (questionId, value) => {
     setAnswers((prev) => ({
@@ -131,22 +139,54 @@ export default function TypeDiagnose() {
     setAnswers({})
     setResult(null)
     setHasSubmitted(false)
+    setCopied(false)
+  }
+
+  const handleCopy = () => {
+    if (!result) return
+    const text = `【100億円タイプ診断】\n私のタイプは「${result.name}」でした！\n${result.description}`
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
   }
 
   return (
-    <section className="view-card">
-      <h2>100億円タイプ診断</h2>
-      <p>
-        100億円の使い道に関する3つの質問に答えると、あなたの「100億円タイプ」が表示されます。
-      </p>
+    <section className="view-card fade-in">
+      <div className="diagnose-header">
+        <h2>100億円タイプ診断</h2>
+        <p>
+          3つの質問に答えると、あなたの「100億円タイプ」が判明します。
+        </p>
+      </div>
+
+      <div className="progress-bar-container">
+        <span className="progress-bar-label">
+          {answeredCount} / {questions.length}
+        </span>
+        <div className="progress-bar-track">
+          <div
+            className="progress-bar-fill"
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
+      </div>
 
       <form onSubmit={handleSubmit} className="diagnose-form">
-        {questions.map((question) => (
+        {questions.map((question, index) => (
           <div key={question.id} className="question-block">
+            <p className="question-number">Q{index + 1}</p>
             <p className="question-text">{question.text}</p>
             <div className="question-options">
               {question.options.map((option) => (
-                <label key={option.value} className="option-label">
+                <label
+                  key={option.value}
+                  className={`option-label${
+                    answers[question.id] === option.value
+                      ? ' option-label--selected'
+                      : ''
+                  }`}
+                >
                   <input
                     type="radio"
                     name={`question-${question.id}`}
@@ -176,12 +216,22 @@ export default function TypeDiagnose() {
       </form>
 
       {result && (
-        <div className="result-card">
+        <div className={`result-card ${result.colorClass}`}>
+          <p className="result-card-label">Your Type</p>
           <h3>{result.name}</h3>
+          <hr className="result-card-divider" />
           <p>{result.description}</p>
+          <div className="result-actions">
+            <button
+              type="button"
+              className={`copy-button${copied ? ' copy-button--copied' : ''}`}
+              onClick={handleCopy}
+            >
+              {copied ? '✓ コピーしました' : '結果をコピー'}
+            </button>
+          </div>
         </div>
       )}
     </section>
   )
 }
-

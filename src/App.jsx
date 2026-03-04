@@ -11,9 +11,11 @@ function App() {
   return (
     <div className="app-container">
       <header className="app-header">
-        <h1 className="app-title">100億円 人生シミュレーター</h1>
+        <h1 className="app-title">
+          <span className="app-title-accent">100億円</span> タイプ診断
+        </h1>
         <p className="app-subtitle">
-          もしあなたが100億円を持っていたら、どんな人生戦略を描きますか？
+          100億円の使い道から、あなたの性格と金銭観を診断します
         </p>
       </header>
 
@@ -27,38 +29,73 @@ function App() {
         </button>
         <button
           type="button"
-          className={`nav-tab ${selectedView === 'diagnosis' ? 'nav-tab--active' : ''}`}
+          className={`nav-tab nav-tab--primary ${selectedView === 'diagnosis' ? 'nav-tab--active' : ''}`}
           onClick={() => setSelectedView('diagnosis')}
         >
-          人生スキル診断
+          タイプ診断
         </button>
         <button
           type="button"
           className={`nav-tab ${selectedView === 'speed' ? 'nav-tab--active' : ''}`}
           onClick={() => setSelectedView('speed')}
         >
-          100億消費スピード
+          消費スピード
         </button>
         <button
           type="button"
           className={`nav-tab ${selectedView === 'compare' ? 'nav-tab--active' : ''}`}
           onClick={() => setSelectedView('compare')}
         >
-          現実比較モード
+          現実比較
         </button>
       </nav>
 
-      <main className="view-container">
+      <main className="view-container" key={selectedView}>
         {selectedView === 'home' && (
-          <section className="view-card">
-            <h2>ようこそ</h2>
-            <p>
-              このアプリは、あなたが100億円を手にしたときの「人生の選択肢」を体験するためのシミュレーターです。
-            </p>
-            <p>
-              上のタブから「人生スキル診断」「100億円消費スピード」「現実比較モード」を選んで体験できます。
-            </p>
-          </section>
+          <div>
+            <div className="home-hero">
+              <span className="home-hero-eyebrow">Main Feature</span>
+              <div className="home-hero-display">¥100億円</div>
+              <h2>あなたならどう使う？</h2>
+              <p>
+                3つの質問に答えるだけで、あなたの「100億円タイプ」が判明します。
+                友達と比較して、価値観の違いを楽しもう。
+              </p>
+              <button
+                type="button"
+                className="home-cta"
+                onClick={() => setSelectedView('diagnosis')}
+              >
+                診断をはじめる →
+              </button>
+            </div>
+
+            <div className="home-sub-section fade-in">
+              <p className="home-sub-label">Other Modes</p>
+              <div className="home-sub-cards">
+                <div
+                  className="home-sub-card"
+                  onClick={() => setSelectedView('speed')}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && setSelectedView('speed')}
+                >
+                  <h3>100億円 消費スピード体験</h3>
+                  <p>毎秒10万円使ったら、何年で無くなる？</p>
+                </div>
+                <div
+                  className="home-sub-card"
+                  onClick={() => setSelectedView('compare')}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && setSelectedView('compare')}
+                >
+                  <h3>100億円 現実比較モード</h3>
+                  <p>コンビニ何店舗分？マンション何棟分？</p>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
 
         {selectedView === 'diagnosis' && (

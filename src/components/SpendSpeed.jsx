@@ -23,6 +23,10 @@ function calculateFromPerSecond(amountPerSecond) {
   }
 }
 
+function formatJPY(value) {
+  return Number(value).toLocaleString('ja-JP')
+}
+
 export default function SpendSpeed() {
   const [perSecond, setPerSecond] = useState('')
   const [perDay, setPerDay] = useState('')
@@ -49,7 +53,7 @@ export default function SpendSpeed() {
   }
 
   return (
-    <section className="view-card">
+    <section className="view-card fade-in">
       <h2>100億円 消費スピード体験</h2>
       <p>どのくらいのペースでお金を使うと、100億円がどのくらいで無くなるのかを体感できます。</p>
 
@@ -62,10 +66,21 @@ export default function SpendSpeed() {
               min="0"
               value={perSecond}
               onChange={(e) => setPerSecond(e.target.value)}
-              placeholder="例: 100000"
+              placeholder="例: 100,000"
             />
           </label>
-          <p className="field-hint">※ こちらを入力すると「毎秒〇円」パターンで計算します。</p>
+          <div className="preset-group">
+            <button type="button" className="preset-button" onClick={() => setPerSecond('10000')}>
+              1万円/秒
+            </button>
+            <button type="button" className="preset-button" onClick={() => setPerSecond('100000')}>
+              10万円/秒
+            </button>
+            <button type="button" className="preset-button" onClick={() => setPerSecond('1000000')}>
+              100万円/秒
+            </button>
+          </div>
+          <p className="field-hint">こちらを入力すると「毎秒〇円」パターンで計算します。</p>
         </div>
 
         <div className="field-separator">または</div>
@@ -78,10 +93,21 @@ export default function SpendSpeed() {
               min="0"
               value={perDay}
               onChange={(e) => setPerDay(e.target.value)}
-              placeholder="例: 10000000"
+              placeholder="例: 10,000,000"
             />
           </label>
-          <p className="field-hint">※ 上の「1秒あたり」を空にしてこちらだけ入力すると、日単位で計算します。</p>
+          <div className="preset-group">
+            <button type="button" className="preset-button" onClick={() => setPerDay('1000000')}>
+              100万円/日
+            </button>
+            <button type="button" className="preset-button" onClick={() => setPerDay('10000000')}>
+              1,000万円/日
+            </button>
+            <button type="button" className="preset-button" onClick={() => setPerDay('100000000')}>
+              1億円/日
+            </button>
+          </div>
+          <p className="field-hint">上の「1秒あたり」を空にしてこちらだけ入力すると、日単位で計算します。</p>
         </div>
 
         <div className="form-actions">
@@ -95,15 +121,21 @@ export default function SpendSpeed() {
       </form>
 
       {result && (
-        <div className="result-card">
-          <h3>100億円を使い切るまでの目安</h3>
+        <div className="result-card result--blue">
+          <p className="result-card-label">Result</p>
+          <h3>100億円を使い切るまで</h3>
+          <hr className="result-card-divider" />
           <p>
-            約 <strong>{result.days.toFixed(1)}</strong> 日
-            （およそ <strong>{result.years.toFixed(2)}</strong> 年）
+            <span className="speed-result-value">{formatJPY(result.days.toFixed(1))}</span>
+            <span className="speed-result-unit">日</span>
+          </p>
+          <p>
+            およそ{' '}
+            <span className="speed-result-value">{result.years.toFixed(2)}</span>
+            <span className="speed-result-unit">年</span>
           </p>
         </div>
       )}
     </section>
   )
 }
-
