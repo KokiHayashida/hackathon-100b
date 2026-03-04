@@ -154,7 +154,7 @@
 .home-hero-display {
   font-size: clamp(3rem, 9vw, 5.5rem);
   font-weight: 800;
-  color: var(--text-primary);
+  color: var(--accent);
   letter-spacing: -0.045em;
   line-height: 1;
   margin-bottom: 0.75rem;
@@ -235,6 +235,7 @@
   padding: 1.2rem 1.25rem;
   background-color: var(--surface-1);
   border: 1px solid var(--border);
+  border-left-width: 3px;
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: border-color 0.15s ease, transform 0.1s ease;
@@ -245,6 +246,11 @@
   border-color: var(--border-strong);
   transform: translateY(-1px);
 }
+
+.home-sub-cards .home-sub-card:nth-child(1) { border-left-color: var(--teal); }
+.home-sub-cards .home-sub-card:nth-child(1):hover { border-left-color: var(--teal); }
+.home-sub-cards .home-sub-card:nth-child(2) { border-left-color: var(--purple); }
+.home-sub-cards .home-sub-card:nth-child(2):hover { border-left-color: var(--purple); }
 
 .home-sub-card h3 {
   margin: 0 0 0.35rem;
@@ -331,11 +337,15 @@
 .question-number {
   font-size: 0.68rem;
   font-weight: 700;
-  color: var(--accent);
   letter-spacing: 0.1em;
   margin: 0 0 0.6rem;
   text-transform: uppercase;
 }
+
+/* Q1/Q2/Q3 それぞれに固有色 */
+.diagnose-form .question-block:nth-child(1) .question-number { color: var(--teal); }
+.diagnose-form .question-block:nth-child(2) .question-number { color: var(--blue); }
+.diagnose-form .question-block:nth-child(3) .question-number { color: var(--purple); }
 
 .question-text {
   margin: 0 0 1.1rem;
@@ -375,6 +385,32 @@
   border-color: var(--accent);
   background-color: var(--accent-subtle);
   color: var(--text-primary);
+}
+
+/* 各質問の選択状態を番号色に連動 */
+.diagnose-form .question-block:nth-child(1) .option-label--selected {
+  border-color: var(--teal);
+  background-color: var(--teal-subtle);
+}
+.diagnose-form .question-block:nth-child(1) .option-label input[type='radio']:checked {
+  border-color: var(--teal);
+  box-shadow: inset 0 0 0 3px var(--teal);
+}
+.diagnose-form .question-block:nth-child(2) .option-label--selected {
+  border-color: var(--blue);
+  background-color: var(--blue-subtle);
+}
+.diagnose-form .question-block:nth-child(2) .option-label input[type='radio']:checked {
+  border-color: var(--blue);
+  box-shadow: inset 0 0 0 3px var(--blue);
+}
+.diagnose-form .question-block:nth-child(3) .option-label--selected {
+  border-color: var(--purple);
+  background-color: var(--purple-subtle);
+}
+.diagnose-form .question-block:nth-child(3) .option-label input[type='radio']:checked {
+  border-color: var(--purple);
+  box-shadow: inset 0 0 0 3px var(--purple);
 }
 
 .option-label input[type='radio'] {
@@ -535,6 +571,24 @@
   border-color: var(--accent);
 }
 
+/* Result card — type color variants */
+
+.result--teal::before         { background-color: var(--teal); }
+.result--teal h3              { color: var(--teal); }
+.result--teal .copy-button:hover { border-color: var(--teal); }
+
+.result--blue::before         { background-color: var(--blue); }
+.result--blue h3              { color: var(--blue); }
+.result--blue .copy-button:hover { border-color: var(--blue); }
+
+.result--purple::before       { background-color: var(--purple); }
+.result--purple h3            { color: var(--purple); }
+.result--purple .copy-button:hover { border-color: var(--purple); }
+
+.result--amber::before        { background-color: var(--accent); }
+.result--amber h3             { color: var(--accent); }
+.result--amber .copy-button:hover { border-color: var(--accent); }
+
 /* ========================================
    Speed Form
    ======================================== */
@@ -633,7 +687,7 @@
 .speed-result-value {
   font-size: 2.2rem;
   font-weight: 800;
-  color: var(--accent);
+  color: var(--blue);
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
 }
@@ -661,7 +715,12 @@
   border-radius: var(--radius-md);
   background-color: var(--surface-1);
   border: 1px solid var(--border);
+  border-left-width: 3px;
 }
+
+.compare-item:nth-child(1) { border-left-color: var(--teal); }
+.compare-item:nth-child(2) { border-left-color: var(--blue); }
+.compare-item:nth-child(3) { border-left-color: var(--purple); }
 
 .compare-item h3 {
   margin: 0 0 0.6rem;
@@ -674,11 +733,14 @@
 .compare-big-number {
   font-size: 2.2rem;
   font-weight: 800;
-  color: var(--text-primary);
   letter-spacing: -0.03em;
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
+
+.compare-item:nth-child(1) .compare-big-number { color: var(--teal); }
+.compare-item:nth-child(2) .compare-big-number { color: var(--blue); }
+.compare-item:nth-child(3) .compare-big-number { color: var(--purple); }
 
 .compare-big-unit {
   font-size: 0.85rem;

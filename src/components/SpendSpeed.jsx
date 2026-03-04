@@ -121,7 +121,7 @@ export default function SpendSpeed() {
       </form>
 
       {result && (
-        <div className="result-card">
+        <div className="result-card result--blue">
           <p className="result-card-label">Result</p>
           <h3>100億円を使い切るまで</h3>
           <hr className="result-card-divider" />

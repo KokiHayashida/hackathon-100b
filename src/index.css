@@ -14,6 +14,15 @@
   --accent-hover: #cc8e16;
   --accent-subtle: rgba(232, 162, 25, 0.1);
   --accent-border: rgba(232, 162, 25, 0.28);
+  --teal: #2cb899;
+  --teal-subtle: rgba(44, 184, 153, 0.1);
+  --teal-border: rgba(44, 184, 153, 0.28);
+  --blue: #4a9fd4;
+  --blue-subtle: rgba(74, 159, 212, 0.1);
+  --blue-border: rgba(74, 159, 212, 0.28);
+  --purple: #9476e8;
+  --purple-subtle: rgba(148, 118, 232, 0.1);
+  --purple-border: rgba(148, 118, 232, 0.28);
   --success: #10b981;
   --success-subtle: rgba(16, 185, 129, 0.1);
   --error: #ef4444;

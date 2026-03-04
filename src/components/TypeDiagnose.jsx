@@ -36,21 +36,25 @@ const TYPE_PROFILES = {
     name: '社会貢献リーダー型',
     description:
       '寄付や社会課題の解決に強い関心があり、お金を通じて世界を良くしたいタイプです。',
+    colorClass: 'result--teal',
   },
   global_investor: {
     name: '世界投資家型',
     description:
       '投資や事業に積極的で、100億円をさらに増やしながらインパクトを出したいタイプです。',
+    colorClass: 'result--blue',
   },
   luxury_creator: {
     name: '自由クリエイター型',
     description:
       '自分や家族の豊かな生活、クリエイティブな体験を重視するタイプです。',
+    colorClass: 'result--purple',
   },
   balanced_planner: {
     name: 'バランス設計者型',
     description:
       '社会貢献・投資・生活のバランスを取りながら、長期的に安定した未来を描くタイプです。',
+    colorClass: 'result--amber',
   },
 }
 
@@ -212,7 +216,7 @@ export default function TypeDiagnose() {
       </form>
 
       {result && (
-        <div className="result-card">
+        <div className={`result-card ${result.colorClass}`}>
           <p className="result-card-label">Your Type</p>
           <h3>{result.name}</h3>
           <hr className="result-card-divider" />
