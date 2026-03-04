@@ -54,8 +54,9 @@ function App() {
         {selectedView === 'home' && (
           <div className="fade-in">
             <div className="home-hero">
-              <span className="home-hero-label">Main Feature</span>
-              <h2>100億円、あなたならどう使う？</h2>
+              <span className="home-hero-eyebrow">Main Feature</span>
+              <div className="home-hero-display">¥100億円</div>
+              <h2>あなたならどう使う？</h2>
               <p>
                 3つの質問に答えるだけで、あなたの「100億円タイプ」が判明します。
                 友達と比較して、価値観の違いを楽しもう。
