@@ -4,4 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/hackathon-100b/',  // GitHub Pages: https://<user>.github.io/hackathon-100b/
 })
