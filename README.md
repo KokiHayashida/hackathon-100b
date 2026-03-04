@@ -1,16 +1,181 @@
-# React + Vite
+# 100億円タイプ診断 💰
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+「もし100億円あったら、あなたはどう使う？」
 
-Currently, two official plugins are available:
+**100億円の使い道から性格＆金銭観、経済感覚を判定する診断Webアプリ**です。  
+MBTIのように質問に答えていくと、あなたの **「100億円タイプ」** が表示されます。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+友達と比較したり、価値観の違いを楽しめる **エンタメ型診断アプリ**です。
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## コンセプト
 
-## Expanding the ESLint configuration
+本プロジェクトはハッカソンテーマ **「100億」** をもとに開発しています。
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+従来の「100億円の使い道を計画するツール」から方向性を変更し、
+
+**100億円の使い道から性格を診断するエンタメアプリ**
+
+として設計しています。
+
+---
+
+## コンセプト変更
+
+### 旧案
+100億円をどう使うかを設計する、実用・シミュレーション寄りツール
+
+### 新案
+質問に答えると **「あなたは〇〇タイプ」** と結果が出る、  
+**MBTIのような診断型エンタメアプリ**
+
+---
+
+## このコンセプトの狙い
+
+### 1) エンタメ性
+ゲーム感覚で楽しめる体験を重視します。
+
+### 2) 共有・拡散
+友達と「自分はこのタイプだった」と共有・比較しやすい体験を作ります。
+
+### 3) ゴールが明確
+ユーザーの目的を **「診断結果を見る」** に絞ることで、体験をシンプルにします。
+
+---
+
+## 機能（MVP）
+
+### ⭐メイン機能：100億円タイプ診断
+質問に答えると、あなたの **100億円タイプ** が表示されます。
+
+例：
+- 社会貢献リーダー型
+- 世界投資家型
+- 研究開発オタク型
+- 自由クリエイター型
+
+#### 質問例
+- 100億円のうちいくらを投資する？
+- 社会貢献にはいくら使う？
+- 自分の生活にはどれくらい使う？
+
+回答パターンから価値観を分析し、タイプ判定します。
+
+---
+
+## サブ機能（余裕があれば）
+
+### 100億消費スピード体験
+例：毎秒10万円使ったら、100億円は何年でなくなる？
+
+### 現実比較モード
+100億円 = コンビニ〇店舗分 / 年収500万円の生涯収入〇人分 / マンション〇棟分 など
+
+---
+
+## ユーザー体験（UX）
+
+ユーザーの流れ：
+1. 質問に回答
+2. 診断ロジックで分析
+3. 「あなたは〇〇タイプ」
+
+タイプの種類を増やすことで、何度も試したくなる・友達と比較したくなるUXを目指します。
+
+---
+
+## 技術構成
+
+- フロントエンド：React + Vite
+- 将来的な拡張：AI文章生成（Dify等）
+  - ※APIキーはフロントに直接置かず、Vercel Functions等で中継する想定
+
+---
+
+## 開発環境
+
+### 1) 依存関係のインストール
+
+```bash
+npm install
+````
+
+### 2) 開発サーバ起動
+
+```bash
+npm run dev
+```
+
+### 3) ブラウザでアクセス
+
+```text
+http://localhost:5173
+```
+
+---
+
+## Git運用ルール
+
+* mainに直接pushしない
+* 1人1ブランチ
+* PR（Pull Request）でmerge
+
+### 作業開始（最新版取得）
+
+```bash
+git checkout main
+git pull
+git checkout <branch>
+```
+
+### 共有（コミット）
+
+```bash
+git add .
+git commit -m "message"
+```
+
+### push
+
+```bash
+git push
+```
+
+---
+
+## リポジトリ
+
+* GitHub：KokiHayashida/hackathon-100b
+
+---
+
+## 今後のタスク
+
+### 診断設計
+
+* 質問項目の具体化
+* タイプ（性格・価値観）のバリエーション作成
+
+### 診断ロジック
+
+* 回答スコア → タイプ判定のルール設計
+
+### UI実装
+
+* 診断画面
+* 結果画面
+
+### プレゼン準備
+
+* 課題 → 解決 → デモ → 技術 → 今後の展望
+
+---
+
+## チーム
+
+ハッカソンチーム開発プロジェクト
+
+```
+```
