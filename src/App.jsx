@@ -62,7 +62,7 @@ function App() {
           <div>
             <div className="home-hero">
               <span className="home-hero-eyebrow">Main Feature</span>
-              <div className="home-hero-display">¥100億円</div>
+              <div className="home-hero-display">100億円</div>
               <h2>あなたならどう使う？</h2>
               <p>
                 3つの質問に答えるだけで、あなたの「100億円タイプ」が判明します。

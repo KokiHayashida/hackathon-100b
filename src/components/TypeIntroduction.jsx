@@ -70,15 +70,21 @@ export default function TypeIntroduction({ scrollToType, onScrollDone }) {
               id={`type-${type.typeCode}`}
               className={`type-intro-section ${colorClass}`}
             >
-              <h3 className="type-intro-section-title">
-                {type.typeCode}：{type.name}
-              </h3>
-              <img
-                src={getTypeImagePath(type.typeCode)}
-                alt={`${type.name}のイメージ`}
-                className="type-intro-section-image"
-              />
-              <blockquote className="type-intro-quote">{type.quote}</blockquote>
+              <div className="type-intro-section-hero">
+                <div className="type-intro-section-image-wrap">
+                  <img
+                    src={getTypeImagePath(type.typeCode)}
+                    alt={`${type.name}のイメージ`}
+                    className="type-intro-section-image"
+                  />
+                </div>
+                <div className="type-intro-section-hero-text">
+                  <h3 className="type-intro-section-title">
+                    {type.typeCode}：{type.name}
+                  </h3>
+                  <blockquote className="type-intro-quote">{type.quote}</blockquote>
+                </div>
+              </div>
               <div className="type-intro-content">
                 <ReactMarkdown>{type.content}</ReactMarkdown>
               </div>

@@ -364,23 +364,99 @@ html {
   margin: 0 0 0.4rem;
 }
 
+.diagnose-body {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-top: 0;
+}
+
 .diagnose-form {
+  flex: 1;
+  min-width: 0;
   margin-top: 0;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
 }
 
+/* 設問メーター（問題ごとのナビゲーション） */
+.question-meter {
+  position: sticky;
+  top: 5rem;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.5rem 0.25rem;
+  background-color: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-top: 0;
+}
+
+.question-meter-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: var(--border-strong);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.question-meter-dot:hover {
+  background-color: var(--text-muted);
+}
+
+.question-meter-dot--answered {
+  background-color: var(--emerald);
+}
+
+.question-meter-dot--answered:hover {
+  background-color: var(--emerald);
+  opacity: 0.9;
+}
+
+.question-meter-dot--active {
+  background-color: var(--accent);
+  transform: scale(1.35);
+  box-shadow: 0 0 0 2px var(--accent-subtle);
+}
+
+.question-meter-dot--active:hover {
+  background-color: var(--accent-hover);
+}
+
+.question-meter--inline {
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1.25rem 0 1rem;
+  position: static;
+}
+
 /* ========================================
    Progress Bar
    ======================================== */
 
-.progress-bar-container {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-}
+   .progress-bar-container {
+    position: sticky;      /* スクロールしても固定 */
+    top: 0;                /* 画面の一番上に固定 */
+    z-index: 100;          /* 他の要素より前に表示 */
+  
+    background: var(--surface-1); /* 下の要素が透けないように */
+    padding: 0.5rem 0;
+  
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  
+    border-bottom: 1px solid var(--border); /* 固定バーっぽく */
+  }
 
 .progress-bar-label {
   font-size: 0.74rem;
@@ -557,7 +633,7 @@ html {
 
 .result-card {
   margin-top: 2.5rem;
-  padding: 2.5rem 2rem;
+  padding: 2rem 1rem;
   border-radius: var(--radius-lg);
   background-color: #0f1d2e;
   border: 1px solid var(--border-strong);
@@ -584,11 +660,11 @@ html {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin: 0 0 1.1rem;
+  margin: 0 0 0.6rem;
 }
 
 .result-card h3 {
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.3rem;
   font-size: 1.85rem;
   font-weight: 800;
   color: var(--accent);
@@ -608,7 +684,7 @@ html {
   width: 28px;
   height: 2px;
   background-color: var(--border-strong);
-  margin: 1.25rem auto;
+  margin: 0.75rem auto;
   border: none;
 }
 
@@ -658,6 +734,27 @@ html {
   border-color: var(--emerald);
 }
 
+.share-x-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.2rem;  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background-color: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+  letter-spacing: 0.01em;
+}
+
+.share-x-button:hover {
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+  background-color: var(--surface-1);
+}
+
 /* Result card — type color variants */
 
 .result--teal::before         { background: linear-gradient(90deg, var(--teal), #3dd4b4); }
@@ -686,15 +783,18 @@ html {
 .result--orange h3             { color: var(--orange); }
 .result--orange .copy-button:hover { border-color: var(--orange); }
 
-.result-type-code { font-size: 0.8rem; color: var(--text-muted); margin: 0 0 0.5rem; letter-spacing: 0.1em; }
+.result-type-code { font-size: 0.8rem; color: var(--text-muted); margin: 0 0 0.4rem; letter-spacing: 0.1em; }
 
 .result-type-image {
   display: block;
-  width: 400px;
-  height: 400px;
-  object-fit: contain;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center;
   border-radius: var(--radius-md);
-  margin: 0.75rem auto 0;
+  margin: 0.4rem auto 0;
 }
 
 .result-feature { text-align: left; }
@@ -900,26 +1000,46 @@ html {
 .type-intro-section.result--green  .type-intro-quote { border-left-color: var(--emerald); }
 .type-intro-section.result--orange .type-intro-quote { border-left-color: var(--orange); }
 
-.type-intro-section-title {
-  margin: 0 0 1rem;
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--text-primary);
+.type-intro-section-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.type-intro-section-image-wrap {
+  flex-shrink: 0;
+  width: min(240px, 100%);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background-color: var(--surface-2);
 }
 
 .type-intro-section-image {
   display: block;
   width: 100%;
-  max-width: 280px;
-  height: auto;
-  object-fit: contain;
-  border-radius: var(--radius-md);
-  margin-bottom: 1rem;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.type-intro-section-hero-text {
+  flex: 1;
+  min-width: 200px;
+}
+
+.type-intro-section-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 .type-intro-quote {
-  margin: 0 0 1.25rem;
-  padding: 0.75rem 1rem;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
   font-size: 0.95rem;
   font-style: italic;
   color: var(--text-secondary);
@@ -930,6 +1050,7 @@ html {
 }
 
 .type-intro-content {
+  margin-top: 1.25rem;
   font-size: 0.9rem;
   line-height: 1.7;
   color: var(--text-secondary);
@@ -1161,7 +1282,7 @@ html {
   }
 
   .result-card {
-    padding: 2rem 1.25rem;
+    padding: 1.5rem 0.75rem;
   }
 
   .result-card h3 {
@@ -1179,5 +1300,18 @@ html {
   .form-actions button {
     width: 100%;
     justify-content: center;
+  }
+
+  .diagnose-body {
+    flex-direction: column-reverse;
+  }
+
+  .question-meter {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.5rem;
+    position: static;
   }
 }
