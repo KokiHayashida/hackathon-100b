@@ -6,6 +6,7 @@ export const GROUP_INFO = [
   {
     id: 'stable',
     name: '安定構築',
+    colorClass: 'group--stable',
     subtitle: '守りながら築く設計者たち',
     keywords: ['守る', '設計'],
     typeCodes: ['SLAP', 'SLAC', 'SLIP', 'SLIC'],
@@ -13,6 +14,7 @@ export const GROUP_INFO = [
   {
     id: 'growth',
     name: '成長加速',
+    colorClass: 'group--growth',
     subtitle: '攻めて拡張する機会創出者',
     keywords: ['攻める', '拡張'],
     typeCodes: ['RLAP', 'RLAC', 'RLIP', 'RLIC'],
@@ -20,6 +22,7 @@ export const GROUP_INFO = [
   {
     id: 'social',
     name: '社会共鳴',
+    colorClass: 'group--social',
     subtitle: '人との関係で価値を生む共創型',
     keywords: ['つなぐ', '影響'],
     typeCodes: ['SNIC', 'RNIC', 'RNAC', 'SNAC'],
@@ -27,6 +30,7 @@ export const GROUP_INFO = [
   {
     id: 'self',
     name: '自己実現',
+    colorClass: 'group--self',
     subtitle: '自分の人生を最大化する体験派',
     keywords: ['楽しむ', '体験'],
     typeCodes: ['SNIP', 'SNAP', 'RNAP', 'RNIP'],
