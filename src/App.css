@@ -101,15 +101,15 @@
   color: var(--accent);
 }
 
-/* 消費スピードタブ (3番目) → ティール */
-.nav-tabs .nav-tab:nth-child(3):not(.nav-tab--active):hover { color: var(--teal); }
-.nav-tabs .nav-tab:nth-child(3).nav-tab--active             { color: var(--teal); }
-.nav-tabs .nav-tab:nth-child(3).nav-tab--active::after      { background-color: var(--teal); }
+/* 消費スピードタブ (4番目) → ティール */
+.nav-tabs .nav-tab:nth-child(4):not(.nav-tab--active):hover { color: var(--teal); }
+.nav-tabs .nav-tab:nth-child(4).nav-tab--active             { color: var(--teal); }
+.nav-tabs .nav-tab:nth-child(4).nav-tab--active::after      { background-color: var(--teal); }
 
-/* 現実比較タブ (4番目) → パープル */
-.nav-tabs .nav-tab:nth-child(4):not(.nav-tab--active):hover { color: var(--purple); }
-.nav-tabs .nav-tab:nth-child(4).nav-tab--active             { color: var(--purple); }
-.nav-tabs .nav-tab:nth-child(4).nav-tab--active::after      { background-color: var(--purple); }
+/* 現実比較タブ (5番目) → パープル */
+.nav-tabs .nav-tab:nth-child(5):not(.nav-tab--active):hover { color: var(--purple); }
+.nav-tabs .nav-tab:nth-child(5).nav-tab--active             { color: var(--purple); }
+.nav-tabs .nav-tab:nth-child(5).nav-tab--active::after      { background-color: var(--purple); }
 
 /* ========================================
    View Container
@@ -598,6 +598,8 @@
 .result--blue   .result-card-divider { background-color: var(--blue); }
 .result--purple .result-card-divider { background-color: var(--purple); }
 .result--amber  .result-card-divider { background-color: var(--accent); }
+.result--green  .result-card-divider { background-color: var(--emerald); }
+.result--orange .result-card-divider { background-color: var(--orange); }
 
 .result-actions {
   margin-top: 1.5rem;
@@ -654,6 +656,22 @@
 .result--amber::before        { background-color: var(--accent); }
 .result--amber h3             { color: var(--accent); }
 .result--amber .copy-button:hover { border-color: var(--accent); }
+
+.result--green   .result-card-divider { background-color: var(--emerald); }
+.result--green::before         { background-color: var(--emerald); }
+.result--green h3              { color: var(--emerald); }
+.result--green .copy-button:hover { border-color: var(--emerald); }
+
+.result--orange  .result-card-divider { background-color: var(--orange); }
+.result--orange::before        { background-color: var(--orange); }
+.result--orange h3             { color: var(--orange); }
+.result--orange .copy-button:hover { border-color: var(--orange); }
+
+.result-type-code { font-size: 0.8rem; color: var(--text-muted); margin: 0 0 0.5rem; letter-spacing: 0.1em; }
+.result-feature { text-align: left; }
+.result-details { text-align: left; margin-top: 1rem; }
+.result-details h4 { font-size: 0.88rem; margin: 0 0 0.4rem; color: var(--text-primary); }
+.result-details ul { margin: 0; padding-left: 1.2rem; font-size: 0.85rem; line-height: 1.6; color: var(--text-secondary); }
 
 /* ========================================
    Speed Form
@@ -852,6 +870,133 @@
 }
 
 /* ========================================
+   Type Introduction
+   ======================================== */
+
+.type-intro {
+  padding-bottom: 2rem;
+}
+
+.type-intro-header {
+  margin-bottom: 2.5rem;
+}
+
+.type-intro-header h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.type-intro-header p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.type-intro-group {
+  margin-bottom: 2.5rem;
+}
+
+.type-intro-group-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.type-intro-group-header h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.type-intro-group-subtitle {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.type-intro-keywords {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.type-intro-keyword {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  background-color: var(--surface-2);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.type-intro-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.type-intro-card {
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  background-color: var(--surface-1);
+  border: 1px solid var(--border-strong);
+  border-left: 4px solid var(--accent);
+  position: relative;
+}
+
+.type-intro-card.result--teal   { border-left-color: var(--teal); }
+.type-intro-card.result--blue  { border-left-color: var(--blue); }
+.type-intro-card.result--purple { border-left-color: var(--purple); }
+.type-intro-card.result--amber { border-left-color: var(--accent); }
+.type-intro-card.result--green { border-left-color: var(--emerald); }
+.type-intro-card.result--orange { border-left-color: var(--orange); }
+
+.type-intro-card-code {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.type-intro-card h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.type-intro-card-feature {
+  margin: 0 0 0.75rem;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.type-intro-card-details {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.type-intro-detail-label {
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-right: 0.25rem;
+}
+
+.type-intro-card-details ul {
+  margin: 0.25rem 0 0 1rem;
+  padding: 0;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ========================================
    Responsive
    ======================================== */
 
@@ -885,6 +1030,10 @@
   }
 
   .home-sub-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .type-intro-cards {
     grid-template-columns: 1fr;
   }
 
