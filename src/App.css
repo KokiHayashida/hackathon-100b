@@ -1349,6 +1349,90 @@ html {
   margin: 0 0 0.75rem;
 }
 
+.references-axis-legends {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.axis-legend-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4rem;
+  padding: 1.25rem 1.35rem;
+  border-radius: var(--radius-md);
+  border-left: 5px solid;
+  background-color: var(--surface-1);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.axis-legend-card--sr {
+  border-left-color: var(--teal);
+  background: linear-gradient(90deg, color-mix(in oklch, var(--teal) 12%, var(--surface-1)), var(--surface-1) 20%);
+}
+.axis-legend-card--sr .axis-letter { color: var(--teal); }
+
+.axis-legend-card--ln {
+  border-left-color: var(--blue);
+  background: linear-gradient(90deg, color-mix(in oklch, var(--blue) 12%, var(--surface-1)), var(--surface-1) 20%);
+}
+.axis-legend-card--ln .axis-letter { color: var(--blue); }
+
+.axis-legend-card--ai {
+  border-left-color: var(--purple);
+  background: linear-gradient(90deg, color-mix(in oklch, var(--purple) 12%, var(--surface-1)), var(--surface-1) 20%);
+}
+.axis-legend-card--ai .axis-letter { color: var(--purple); }
+
+.axis-legend-card--pc {
+  border-left-color: var(--emerald);
+  background: linear-gradient(90deg, color-mix(in oklch, var(--emerald) 12%, var(--surface-1)), var(--surface-1) 20%);
+}
+.axis-legend-card--pc .axis-letter { color: var(--emerald); }
+
+.axis-legend-pair {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.axis-legend-pair--vertical {
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.axis-legend-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.axis-legend-vs {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.references-axis-legends .axis-letter {
+  font-weight: 800;
+  font-size: 1.2em;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 480px) {
+  .references-axis-legends {
+    grid-template-columns: 1fr;
+  }
+}
+
 .references-axis-card {
   margin-bottom: 2rem;
   padding: 1.25rem;

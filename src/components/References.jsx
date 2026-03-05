@@ -44,6 +44,36 @@ export default function References() {
       {/* セクション2: 4つの診断軸のもとになった考え方 */}
       <section id="four-axes" className="references-section">
         <h3 className="references-section-title">4つの軸はどこから来たの？</h3>
+        <div className="references-axis-legends">
+          <div className="axis-legend-card axis-legend-card--sr">
+            <div className="axis-legend-pair axis-legend-pair--vertical">
+              <span className="axis-legend-item"><span className="axis-letter">S</span> = Stability（安定）</span>
+              <span className="axis-legend-vs">↕</span>
+              <span className="axis-legend-item"><span className="axis-letter">R</span> = Risk（挑戦）</span>
+            </div>
+          </div>
+          <div className="axis-legend-card axis-legend-card--ln">
+            <div className="axis-legend-pair axis-legend-pair--vertical">
+              <span className="axis-legend-item"><span className="axis-letter">L</span> = Long-term（長期）</span>
+              <span className="axis-legend-vs">↕</span>
+              <span className="axis-legend-item"><span className="axis-letter">N</span> = Now（現在）</span>
+            </div>
+          </div>
+          <div className="axis-legend-card axis-legend-card--ai">
+            <div className="axis-legend-pair axis-legend-pair--vertical">
+              <span className="axis-legend-item"><span className="axis-letter">A</span> = Analysis（分析）</span>
+              <span className="axis-legend-vs">↕</span>
+              <span className="axis-legend-item"><span className="axis-letter">I</span> = Intuition（直感）</span>
+            </div>
+          </div>
+          <div className="axis-legend-card axis-legend-card--pc">
+            <div className="axis-legend-pair axis-legend-pair--vertical">
+              <span className="axis-legend-item"><span className="axis-letter">P</span> = Personal（自己）</span>
+              <span className="axis-legend-vs">↕</span>
+              <span className="axis-legend-item"><span className="axis-letter">C</span> = Collective（社会）</span>
+            </div>
+          </div>
+        </div>
         {FOUR_AXES.map((axis) => (
           <div key={axis.id} className="references-axis-card">
             <h4 className="references-axis-title">{axis.label}</h4>
