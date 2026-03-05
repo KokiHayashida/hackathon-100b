@@ -1,4 +1,12 @@
 /* ========================================
+   Base
+   ======================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ========================================
    Layout
    ======================================== */
 
@@ -310,6 +318,41 @@
   font-size: 0.78rem;
   color: var(--text-muted);
   line-height: 1.55;
+}
+
+/* ========================================
+   Diagnosis — Loading
+   ======================================== */
+
+.diagnose-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  gap: 1.25rem;
+}
+
+.diagnose-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-strong);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: diagnose-spin 0.9s linear infinite;
+}
+
+.diagnose-loading-text {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+@keyframes diagnose-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ========================================
@@ -893,6 +936,134 @@
   font-size: 0.92rem;
   color: var(--text-secondary);
   line-height: 1.6;
+}
+
+/* 目次 */
+.type-intro-toc {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background-color: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.type-intro-toc-group {
+  margin-bottom: 1.25rem;
+}
+
+.type-intro-toc-group:last-child {
+  margin-bottom: 0;
+}
+
+.type-intro-toc-group-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.type-intro-toc-group-subtitle {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.type-intro-toc-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.type-intro-toc-link {
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.15s ease, text-decoration 0.15s ease;
+}
+
+.type-intro-toc-link:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+/* 各タイプ詳細セクション */
+.type-intro-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.type-intro-section {
+  scroll-margin-top: 1rem;
+  padding: 1.5rem 1.25rem;
+  background-color: var(--surface-1);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--accent);
+}
+
+.type-intro-section.result--teal   { border-left-color: var(--teal); }
+.type-intro-section.result--blue   { border-left-color: var(--blue); }
+.type-intro-section.result--purple { border-left-color: var(--purple); }
+.type-intro-section.result--amber  { border-left-color: var(--accent); }
+.type-intro-section.result--green  { border-left-color: var(--emerald); }
+.type-intro-section.result--orange { border-left-color: var(--orange); }
+
+.type-intro-section-title {
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.type-intro-quote {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  background-color: var(--surface-2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.type-intro-content {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.type-intro-content h4 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.type-intro-content h4:first-child {
+  margin-top: 0;
+}
+
+.type-intro-content p {
+  margin: 0 0 0.75rem;
+}
+
+.type-intro-content ul {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.type-intro-content li {
+  margin-bottom: 0.35rem;
+}
+
+.type-intro-content strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .type-intro-group {
