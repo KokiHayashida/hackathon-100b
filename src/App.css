@@ -161,16 +161,24 @@ html {
 }
 .home-hero > *:nth-child(3) {
   animation: staggerFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: 0.48s;
+  animation-delay: 0.4s;
 }
 .home-hero > *:nth-child(4) {
   animation: staggerFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: 0.64s;
+  animation-delay: 0.52s;
 }
 .home-hero > *:nth-child(5) {
+  animation: staggerFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.64s;
+}
+.home-hero > *:nth-child(6) {
+  animation: staggerFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.76s;
+}
+.home-hero > *:nth-child(7) {
   animation-name: staggerFadeUp, ctaFloat;
   animation-duration: 0.75s, 4.5s;
-  animation-delay: 0.8s, 2.5s;
+  animation-delay: 0.88s, 2.5s;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1), ease-in-out;
   animation-fill-mode: both, none;
   animation-iteration-count: 1, infinite;
@@ -206,6 +214,24 @@ html {
   color: var(--teal);
 }
 
+.home-hero-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.home-hero-lead {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 auto 0.75rem;
+  max-width: 420px;
+  line-height: 1.7;
+}
+
 .home-hero h2 {
   font-size: clamp(1.2rem, 3.5vw, 1.6rem);
   font-weight: 700;
@@ -220,6 +246,10 @@ html {
   margin: 0 auto 2.8rem;
   max-width: 420px;
   line-height: 1.85;
+}
+
+.home-hero-lead + p {
+  margin-bottom: 2.8rem;
 }
 
 .home-cta {
