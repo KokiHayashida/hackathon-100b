@@ -11,11 +11,14 @@ const SCALE_LABELS = {
   5: '強くそう思う',
 }
 
+const DIAGNOSE_DELAY_MS = 2000
+
 export default function TypeDiagnose() {
   const [answers, setAnswers] = useState({})
   const [result, setResult] = useState(null)
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [isDiagnosing, setIsDiagnosing] = useState(false)
 
   const answeredCount = Object.keys(answers).length
   const progressPercent = (answeredCount / questions.length) * 100
@@ -37,14 +40,18 @@ export default function TypeDiagnose() {
       return
     }
 
-    const scores = calculateScores(answers)
-    const typeCode = getTypeCode(scores)
-    const profile = TYPE_PROFILES[typeCode]
-    if (profile) {
-      setResult({ ...profile, typeCode })
-    } else {
-      setResult(null)
-    }
+    setIsDiagnosing(true)
+    setTimeout(() => {
+      const scores = calculateScores(answers)
+      const typeCode = getTypeCode(scores)
+      const profile = TYPE_PROFILES[typeCode]
+      if (profile) {
+        setResult({ ...profile, typeCode })
+      } else {
+        setResult(null)
+      }
+      setIsDiagnosing(false)
+    }, DIAGNOSE_DELAY_MS)
   }
 
   const handleReset = () => {
@@ -52,6 +59,7 @@ export default function TypeDiagnose() {
     setResult(null)
     setHasSubmitted(false)
     setCopied(false)
+    setIsDiagnosing(false)
   }
 
   const handleCopy = () => {
@@ -66,6 +74,63 @@ export default function TypeDiagnose() {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     })
+  }
+
+  if (isDiagnosing) {
+    return (
+      <section className="view-card fade-in">
+        <div className="diagnose-loading">
+          <div className="diagnose-loading-spinner" aria-hidden="true" />
+          <p className="diagnose-loading-text">診断中...</p>
+        </div>
+      </section>
+    )
+  }
+
+  if (result) {
+    return (
+      <section className="view-card fade-in">
+        <div className={`result-card ${result.colorClass}`}>
+          <p className="result-card-label">Your Type</p>
+          <h3>{result.name}</h3>
+          <p className="result-type-code">{result.typeCode}</p>
+          <hr className="result-card-divider" />
+          <p className="result-feature">{result.feature}</p>
+          {result.strengths && result.strengths.length > 0 && (
+            <div className="result-details">
+              <h4>長所</h4>
+              <ul>
+                {result.strengths.map((s, i) => (
+                  <li key={i}>{s}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {result.weaknesses && result.weaknesses.length > 0 && (
+            <div className="result-details">
+              <h4>短所・弱点</h4>
+              <ul>
+                {result.weaknesses.map((w, i) => (
+                  <li key={i}>{w}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <div className="result-actions">
+            <button
+              type="button"
+              className={`copy-button${copied ? ' copy-button--copied' : ''}`}
+              onClick={handleCopy}
+            >
+              {copied ? '✓ コピーしました' : '結果をコピー'}
+            </button>
+            <button type="button" className="secondary-button" onClick={handleReset}>
+              もう一度診断する
+            </button>
+          </div>
+        </div>
+      </section>
+    )
   }
 
   return (
@@ -151,45 +216,6 @@ export default function TypeDiagnose() {
           </button>
         </div>
       </form>
-
-      {result && (
-        <div className={`result-card ${result.colorClass}`}>
-          <p className="result-card-label">Your Type</p>
-          <h3>{result.name}</h3>
-          <p className="result-type-code">{result.typeCode}</p>
-          <hr className="result-card-divider" />
-          <p className="result-feature">{result.feature}</p>
-          {result.strengths && result.strengths.length > 0 && (
-            <div className="result-details">
-              <h4>長所</h4>
-              <ul>
-                {result.strengths.map((s, i) => (
-                  <li key={i}>{s}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {result.weaknesses && result.weaknesses.length > 0 && (
-            <div className="result-details">
-              <h4>短所・弱点</h4>
-              <ul>
-                {result.weaknesses.map((w, i) => (
-                  <li key={i}>{w}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          <div className="result-actions">
-            <button
-              type="button"
-              className={`copy-button${copied ? ' copy-button--copied' : ''}`}
-              onClick={handleCopy}
-            >
-              {copied ? '✓ コピーしました' : '結果をコピー'}
-            </button>
-          </div>
-        </div>
-      )}
     </section>
   )
 }
