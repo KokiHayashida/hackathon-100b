@@ -1,6 +1,6 @@
-
 import { useState } from 'react'
 import TypeDiagnose from './components/TypeDiagnose.jsx'
+import TypeIntroduction from './components/TypeIntroduction.jsx'
 import SpendSpeed from './components/SpendSpeed.jsx'
 import RealityCompare from './components/RealityCompare.jsx'
 import './App.css'
@@ -33,6 +33,13 @@ function App() {
           onClick={() => setSelectedView('diagnosis')}
         >
           タイプ診断
+        </button>
+        <button
+          type="button"
+          className={`nav-tab ${selectedView === 'types' ? 'nav-tab--active' : ''}`}
+          onClick={() => setSelectedView('types')}
+        >
+          タイプ一覧
         </button>
         <button
           type="button"
@@ -100,6 +107,10 @@ function App() {
 
         {selectedView === 'diagnosis' && (
           <TypeDiagnose />
+        )}
+
+        {selectedView === 'types' && (
+          <TypeIntroduction />
         )}
 
         {selectedView === 'speed' && (
