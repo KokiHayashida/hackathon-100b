@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { GROUP_INFO } from '../data/groupInfo'
-import { TYPE_PROFILES } from '../data/typeProfiles'
 import { TYPE_INTRODUCTION_DATA } from '../data/typeIntroduceData'
 import { TYPE_COMBINATION_DETAIL } from '../data/typeCombinationDetail'
 import { getTypeImagePath } from '../utils/typeImagePath.js'
+import { getGroupByTypeCode } from '../utils/groupByType.js'
 
 export default function TypeIntroduction({ scrollToType, onScrollDone }) {
   const typeDataMap = Object.fromEntries(
@@ -46,8 +46,19 @@ export default function TypeIntroduction({ scrollToType, onScrollDone }) {
                 if (!data) return null
                 return (
                   <li key={code}>
-                    <a href={`#type-${code}`} className="type-intro-toc-link">
-                      {code} {data.name}
+                    <a
+                      href={`#type-${code}`}
+                      className={`type-intro-toc-link type-intro-toc-link--${group.id}`}
+                    >
+                      <img
+                        src={getTypeImagePath(code)}
+                        alt={`${code} ${data.name}`}
+                        className="type-intro-toc-image"
+                      />
+                      <span className="type-intro-toc-label">
+                        <span className="type-intro-toc-code">{code}</span>
+                        <span className="type-intro-toc-name">{data.name}</span>
+                      </span>
                     </a>
                   </li>
                 )
@@ -60,15 +71,15 @@ export default function TypeIntroduction({ scrollToType, onScrollDone }) {
       {/* 各タイプの詳細 */}
       <div className="type-intro-sections">
         {TYPE_INTRODUCTION_DATA.map((type) => {
-          const profile = TYPE_PROFILES[type.typeCode]
-          const colorClass = profile?.colorClass ?? 'result--teal'
+          const group = getGroupByTypeCode(type.typeCode)
+          const groupColorClass = group?.colorClass ?? 'group--stable'
           const combo = TYPE_COMBINATION_DETAIL[type.typeCode]
 
           return (
             <article
               key={type.typeCode}
               id={`type-${type.typeCode}`}
-              className={`type-intro-section ${colorClass}`}
+              className={`type-intro-section ${groupColorClass}`}
             >
               <div className="type-intro-section-hero">
                 <div className="type-intro-section-image-wrap">

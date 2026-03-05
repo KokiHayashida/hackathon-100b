@@ -63,7 +63,6 @@ function App() {
             <div className="home-hero">
               <span className="home-hero-eyebrow">Main Feature</span>
               <div className="home-hero-display">100億円</div>
-              <span className="home-hero-badge">全16タイプ</span>
               <h2>あなたならどう使う？</h2>
               <p className="home-hero-lead">
                 全16タイプの診断結果
