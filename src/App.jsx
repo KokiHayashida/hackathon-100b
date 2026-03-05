@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import TypeDiagnose from './components/TypeDiagnose.jsx'
 import TypeIntroduction from './components/TypeIntroduction.jsx'
-import RealityCompare from './components/RealityCompare.jsx'
+import References from './components/References.jsx'
 import './App.css'
 
 function App() {
@@ -50,10 +50,10 @@ function App() {
         </button>
         <button
           type="button"
-          className={`nav-tab ${selectedView === 'compare' ? 'nav-tab--active' : ''}`}
-          onClick={() => setSelectedView('compare')}
+          className={`nav-tab ${selectedView === 'references' ? 'nav-tab--active' : ''}`}
+          onClick={() => setSelectedView('references')}
         >
-          現実比較
+          エビデンス
         </button>
       </nav>
 
@@ -83,17 +83,17 @@ function App() {
             </div>
 
             <div className="home-sub-section fade-in">
-              <p className="home-sub-label">Other Modes</p>
+              <p className="home-sub-label">エビデンス</p>
               <div className="home-sub-cards">
                 <div
                   className="home-sub-card"
-                  onClick={() => setSelectedView('compare')}
+                  onClick={() => setSelectedView('references')}
                   role="button"
                   tabIndex={0}
-                  onKeyDown={(e) => e.key === 'Enter' && setSelectedView('compare')}
+                  onKeyDown={(e) => e.key === 'Enter' && setSelectedView('references')}
                 >
-                  <h3>100億円 現実比較モード</h3>
-                  <p>コンビニ何店舗分？マンション何棟分？</p>
+                  <h3>診断の根拠</h3>
+                  <p>行動ファイナンスの研究に基づいた設計の背景</p>
                 </div>
               </div>
             </div>
@@ -111,8 +111,8 @@ function App() {
           />
         )}
 
-        {selectedView === 'compare' && (
-          <RealityCompare />
+        {selectedView === 'references' && (
+          <References />
         )}
       </main>
     </div>

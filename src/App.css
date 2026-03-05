@@ -109,10 +109,10 @@ html {
   color: var(--accent);
 }
 
-/* 現実比較タブ (4番目) → パープル */
-.nav-tabs .nav-tab:nth-child(4):not(.nav-tab--active):hover { color: var(--purple); }
-.nav-tabs .nav-tab:nth-child(4).nav-tab--active             { color: var(--purple); }
-.nav-tabs .nav-tab:nth-child(4).nav-tab--active::after      { background-color: var(--purple); }
+/* エビデンスタブ (4番目) → ティール */
+.nav-tabs .nav-tab:nth-child(4):not(.nav-tab--active):hover { color: var(--teal); }
+.nav-tabs .nav-tab:nth-child(4).nav-tab--active             { color: var(--teal); }
+.nav-tabs .nav-tab:nth-child(4).nav-tab--active::after      { background-color: var(--teal); }
 
 /* ========================================
    View Container
@@ -841,78 +841,6 @@ html {
 .result-compatibility .result-compat-label { font-weight: 600; color: var(--text-primary); }
 
 /* ========================================
-   Compare
-   ======================================== */
-
-.compare-list {
-  margin-top: 1.5rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.7rem;
-}
-
-.compare-item {
-  padding: 1.4rem;
-  border-radius: var(--radius-md);
-  background-color: var(--surface-1);
-  border: 1px solid var(--border);
-  border-left-width: 3px;
-}
-
-.compare-item:nth-child(1) { border-left-color: var(--teal); }
-.compare-item:nth-child(2) { border-left-color: var(--blue); }
-.compare-item:nth-child(3) { border-left-color: var(--purple); }
-
-.compare-item h3 {
-  margin: 0 0 0.6rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  letter-spacing: 0.03em;
-}
-
-.compare-big-number {
-  font-size: 2.2rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-
-.compare-item:nth-child(1) .compare-big-number { color: var(--teal); }
-.compare-item:nth-child(1) h3                  { color: var(--teal); }
-
-.compare-item:nth-child(2) .compare-big-number { color: var(--blue); }
-.compare-item:nth-child(2) h3                  { color: var(--blue); }
-
-.compare-item:nth-child(3) .compare-big-number { color: var(--purple); }
-.compare-item:nth-child(3) h3                  { color: var(--purple); }
-
-.compare-big-unit {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  margin-left: 0.3rem;
-}
-
-.compare-assumption {
-  margin-top: 0.5rem;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-
-.compare-footnote {
-  margin-top: 1.25rem;
-  padding: 0.75rem 1rem;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  background-color: var(--surface-1);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  line-height: 1.65;
-}
-
-/* ========================================
    Placeholder
    ======================================== */
 
@@ -1331,6 +1259,377 @@ html {
 }
 
 /* ========================================
+   References（科学的根拠ページ）
+   ======================================== */
+
+.references-page {
+  padding-bottom: 2rem;
+}
+
+.references-header {
+  margin-bottom: 2rem;
+}
+
+.references-header p {
+  color: var(--text-secondary);
+}
+
+.references-toc {
+  margin-bottom: 2.5rem;
+  padding: 1.25rem 1.5rem;
+  background-color: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.references-toc ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+.references-toc-link {
+  font-size: 0.88rem;
+  color: var(--teal);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.references-toc-link:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+.references-section {
+  scroll-margin-top: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.references-section:last-child {
+  margin-bottom: 0;
+}
+
+.references-section-title {
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+}
+
+.references-lead {
+  margin: 0 0 1.25rem;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.references-intro-quote {
+  margin: 0 0 1rem;
+  padding: 1rem 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  background-color: var(--surface-1);
+  border-left: 4px solid var(--teal);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.references-intro-content {
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.references-intro-content p {
+  margin: 0 0 0.75rem;
+}
+
+.references-axis-legends {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.axis-legend-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4rem;
+  padding: 1.25rem 1.35rem;
+  border-radius: var(--radius-md);
+  border-left: 5px solid;
+  background-color: var(--surface-1);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.axis-legend-card--sr {
+  border-left-color: var(--teal);
+  background: linear-gradient(90deg, color-mix(in oklch, var(--teal) 12%, var(--surface-1)), var(--surface-1) 20%);
+}
+.axis-legend-card--sr .axis-letter { color: var(--teal); }
+
+.axis-legend-card--ln {
+  border-left-color: var(--blue);
+  background: linear-gradient(90deg, color-mix(in oklch, var(--blue) 12%, var(--surface-1)), var(--surface-1) 20%);
+}
+.axis-legend-card--ln .axis-letter { color: var(--blue); }
+
+.axis-legend-card--ai {
+  border-left-color: var(--purple);
+  background: linear-gradient(90deg, color-mix(in oklch, var(--purple) 12%, var(--surface-1)), var(--surface-1) 20%);
+}
+.axis-legend-card--ai .axis-letter { color: var(--purple); }
+
+.axis-legend-card--pc {
+  border-left-color: var(--emerald);
+  background: linear-gradient(90deg, color-mix(in oklch, var(--emerald) 12%, var(--surface-1)), var(--surface-1) 20%);
+}
+.axis-legend-card--pc .axis-letter { color: var(--emerald); }
+
+.axis-legend-pair {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.axis-legend-pair--vertical {
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.axis-legend-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.axis-legend-vs {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.references-axis-legends .axis-letter {
+  font-weight: 800;
+  font-size: 1.2em;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 480px) {
+  .references-axis-legends {
+    grid-template-columns: 1fr;
+  }
+}
+
+.references-axis-card {
+  margin-bottom: 2rem;
+  padding: 1.25rem;
+  background-color: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.references-axis-card:last-of-type {
+  margin-bottom: 0;
+}
+
+.references-axis-title {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.references-axis-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.references-books-note {
+  margin: 1rem 0 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  background-color: var(--surface-1);
+  border-left: 4px solid var(--teal);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.references-theory-block {
+  margin-bottom: 2rem;
+}
+
+.references-theory-block:last-child {
+  margin-bottom: 0;
+}
+
+.references-theory-block h4 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.references-theory-block p {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.references-table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.references-table {
+  width: 100%;
+  min-width: 320px;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.references-table th,
+.references-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.references-table th {
+  font-weight: 600;
+  color: var(--text-muted);
+  background-color: var(--surface-1);
+}
+
+.references-table td {
+  color: var(--text-secondary);
+}
+
+.references-table tbody tr:last-child th,
+.references-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.references-table a {
+  color: var(--teal);
+  text-decoration: none;
+}
+
+.references-table a:hover {
+  text-decoration: underline;
+}
+
+.references-table--compact th {
+  width: 8em;
+}
+
+.references-section h4 {
+  margin: 1.5rem 0 0.75rem;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.references-section h4:first-of-type {
+  margin-top: 0;
+}
+
+.references-disclaimer {
+  padding: 1.25rem;
+  background-color: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.references-disclaimer-content {
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.references-disclaimer-content ul {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.references-disclaimer-content li {
+  margin-bottom: 0.35rem;
+}
+
+.references-website-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.website-card {
+  display: block;
+  padding: 1.25rem;
+  background-color: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.website-card:hover {
+  border-color: var(--teal);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.website-card__category {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--teal);
+  margin-bottom: 0.4rem;
+}
+
+.website-card__title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+  line-height: 1.4;
+}
+
+.website-card__org {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.website-card__desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+}
+
+.website-card__link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--teal);
+}
+
+/* ========================================
    Responsive
    ======================================== */
 
@@ -1375,6 +1674,10 @@ html {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .references-website-cards {
+    grid-template-columns: 1fr;
+  }
+
   .result-card {
     padding: 1.5rem 0.75rem;
   }
@@ -1385,10 +1688,6 @@ html {
 
   .result-type-code {
     font-size: 1rem;
-  }
-
-  .compare-big-number {
-    font-size: 1.8rem;
   }
 
   .form-actions {
