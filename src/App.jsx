@@ -63,9 +63,15 @@ function App() {
             <div className="home-hero">
               <span className="home-hero-eyebrow">Main Feature</span>
               <div className="home-hero-display">100億円</div>
+              <span className="home-hero-badge">全16タイプ</span>
               <h2>あなたならどう使う？</h2>
+              <p className="home-hero-lead">
+                全16タイプの診断結果
+                <br />
+                あなたの100億円の使い方タイプを分析
+              </p>
               <p>
-                3つの質問に答えるだけで、あなたの「100億円タイプ」が判明します。
+                20問に答えるだけで、あなたの「100億円タイプ」が判明します。
                 友達と比較して、価値観の違いを楽しもう。
               </p>
               <button
