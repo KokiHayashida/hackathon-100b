@@ -109,15 +109,10 @@ html {
   color: var(--accent);
 }
 
-/* 消費スピードタブ (4番目) → ティール */
-.nav-tabs .nav-tab:nth-child(4):not(.nav-tab--active):hover { color: var(--teal); }
-.nav-tabs .nav-tab:nth-child(4).nav-tab--active             { color: var(--teal); }
-.nav-tabs .nav-tab:nth-child(4).nav-tab--active::after      { background-color: var(--teal); }
-
-/* 現実比較タブ (5番目) → パープル */
-.nav-tabs .nav-tab:nth-child(5):not(.nav-tab--active):hover { color: var(--purple); }
-.nav-tabs .nav-tab:nth-child(5).nav-tab--active             { color: var(--purple); }
-.nav-tabs .nav-tab:nth-child(5).nav-tab--active::after      { background-color: var(--purple); }
+/* 現実比較タブ (4番目) → パープル */
+.nav-tabs .nav-tab:nth-child(4):not(.nav-tab--active):hover { color: var(--purple); }
+.nav-tabs .nav-tab:nth-child(4).nav-tab--active             { color: var(--purple); }
+.nav-tabs .nav-tab:nth-child(4).nav-tab--active::after      { background-color: var(--purple); }
 
 /* ========================================
    View Container
@@ -712,6 +707,16 @@ html {
 .result--orange .copy-button:hover { border-color: var(--orange); }
 
 .result-type-code { font-size: 0.8rem; color: var(--text-muted); margin: 0 0 0.5rem; letter-spacing: 0.1em; }
+
+.result-type-image {
+  display: block;
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  margin: 0.75rem auto 0;
+}
+
 .result-feature { text-align: left; }
 .result-details { text-align: left; margin-top: 1rem; }
 .result-details h4 { font-size: 0.88rem; margin: 0 0 0.4rem; color: var(--text-primary); }
@@ -719,116 +724,6 @@ html {
 
 .result-compatibility .result-compat-item { margin: 0.3rem 0; font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary); }
 .result-compatibility .result-compat-label { font-weight: 600; color: var(--text-primary); }
-
-/* ========================================
-   Speed Form
-   ======================================== */
-
-.speed-form {
-  margin-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.field-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.field-label {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.field-label input {
-  display: block;
-  margin-top: 0.45rem;
-  width: 100%;
-  padding: 0.65rem 0.9rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background-color: var(--surface-1);
-  color: var(--text-primary);
-  font-size: 0.95rem;
-  font-family: inherit;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.field-label input:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-subtle);
-}
-
-.field-label input::placeholder {
-  color: var(--text-muted);
-}
-
-.field-hint {
-  margin: 0;
-  font-size: 0.77rem;
-  color: var(--text-muted);
-  line-height: 1.55;
-}
-
-.field-separator {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--orange);
-}
-
-.field-separator::before,
-.field-separator::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background-color: var(--border);
-}
-
-.preset-group {
-  display: flex;
-  gap: 0.45rem;
-  flex-wrap: wrap;
-}
-
-.preset-button {
-  padding: 0.32rem 0.7rem;
-  font-size: 0.76rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  background-color: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: border-color 0.15s ease, color 0.15s ease;
-}
-
-.preset-button:hover {
-  color: var(--blue);
-  border-color: var(--blue-border);
-  background-color: var(--surface-2);
-}
-
-.speed-result-value {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: var(--blue);
-  letter-spacing: -0.03em;
-  font-variant-numeric: tabular-nums;
-}
-
-.speed-result-unit {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--orange);
-  margin-left: 0.25rem;
-}
 
 /* ========================================
    Compare
@@ -1022,6 +917,16 @@ html {
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-primary);
+}
+
+.type-intro-section-image {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
 }
 
 .type-intro-quote {
@@ -1272,10 +1177,6 @@ html {
 
   .result-card h3 {
     font-size: 1.45rem;
-  }
-
-  .speed-result-value {
-    font-size: 1.8rem;
   }
 
   .compare-big-number {

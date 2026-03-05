@@ -4,6 +4,7 @@ import { GROUP_INFO } from '../data/groupInfo'
 import { TYPE_PROFILES } from '../data/typeProfiles'
 import { TYPE_INTRODUCTION_DATA } from '../data/typeIntroduceData'
 import { TYPE_COMBINATION_DETAIL } from '../data/typeCombinationDetail'
+import { getTypeImagePath } from '../utils/typeImagePath.js'
 
 export default function TypeIntroduction({ scrollToType, onScrollDone }) {
   const typeDataMap = Object.fromEntries(
@@ -72,6 +73,11 @@ export default function TypeIntroduction({ scrollToType, onScrollDone }) {
               <h3 className="type-intro-section-title">
                 {type.typeCode}：{type.name}
               </h3>
+              <img
+                src={getTypeImagePath(type.typeCode)}
+                alt={`${type.name}のイメージ`}
+                className="type-intro-section-image"
+              />
               <blockquote className="type-intro-quote">{type.quote}</blockquote>
               <div className="type-intro-content">
                 <ReactMarkdown>{type.content}</ReactMarkdown>

@@ -3,6 +3,7 @@ import { questions } from '../data/questions.js'
 import { TYPE_PROFILES } from '../data/typeProfiles.js'
 import { TYPE_COMBINATION } from '../data/typeCombination.js'
 import { calculateScores, getTypeCode } from '../utils/diagnoseLogic.js'
+import { getTypeImagePath } from '../utils/typeImagePath.js'
 
 const SCALE_LABELS = {
   1: '全くそう思わない',
@@ -96,6 +97,11 @@ export default function TypeDiagnose({ onNavigateToType }) {
           <p className="result-card-label">Your Type</p>
           <h3>{result.name}</h3>
           <p className="result-type-code">{result.typeCode}</p>
+          <img
+            src={getTypeImagePath(result.typeCode)}
+            alt={`${result.name}のイメージ`}
+            className="result-type-image"
+          />
           <hr className="result-card-divider" />
           <p className="result-feature">{result.feature}</p>
           {result.strengths && result.strengths.length > 0 && (
