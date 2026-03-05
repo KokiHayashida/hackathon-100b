@@ -647,6 +647,7 @@ html {
 .result-actions {
   margin-top: 1.5rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 0.6rem;
 }
@@ -715,6 +716,9 @@ html {
 .result-details { text-align: left; margin-top: 1rem; }
 .result-details h4 { font-size: 0.88rem; margin: 0 0 0.4rem; color: var(--text-primary); }
 .result-details ul { margin: 0; padding-left: 1.2rem; font-size: 0.85rem; line-height: 1.6; color: var(--text-secondary); }
+
+.result-compatibility .result-compat-item { margin: 0.3rem 0; font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary); }
+.result-compatibility .result-compat-label { font-weight: 600; color: var(--text-primary); }
 
 /* ========================================
    Speed Form
@@ -1064,6 +1068,60 @@ html {
 .type-intro-content strong {
   color: var(--text-primary);
   font-weight: 600;
+}
+
+.type-intro-compatibility {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.type-intro-compat-title {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.type-intro-compat-block {
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-2);
+}
+
+.type-intro-compat-block:last-child {
+  margin-bottom: 0;
+}
+
+.type-intro-compat-best { border-left: 3px solid var(--emerald); }
+.type-intro-compat-worst { border-left: 3px solid var(--text-muted); }
+
+.type-intro-compat-block h5 {
+  margin: 0 0 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.type-intro-compat-stars {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.type-intro-compat-catch {
+  margin: 0 0 0.5rem;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.type-intro-compat-explanation {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
 }
 
 .type-intro-group {

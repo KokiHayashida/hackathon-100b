@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import TypeDiagnose from './components/TypeDiagnose.jsx'
 import TypeIntroduction from './components/TypeIntroduction.jsx'
 import SpendSpeed from './components/SpendSpeed.jsx'
@@ -7,6 +7,14 @@ import './App.css'
 
 function App() {
   const [selectedView, setSelectedView] = useState('home')
+  const [scrollToType, setScrollToType] = useState(null)
+
+  const handleNavigateToType = useCallback((code) => {
+    setSelectedView('types')
+    setScrollToType(code)
+  }, [])
+
+  const handleScrollDone = useCallback(() => setScrollToType(null), [])
 
   return (
     <div className="app-container">
@@ -106,11 +114,14 @@ function App() {
         )}
 
         {selectedView === 'diagnosis' && (
-          <TypeDiagnose />
+          <TypeDiagnose onNavigateToType={handleNavigateToType} />
         )}
 
         {selectedView === 'types' && (
-          <TypeIntroduction />
+          <TypeIntroduction
+            scrollToType={scrollToType}
+            onScrollDone={handleScrollDone}
+          />
         )}
 
         {selectedView === 'speed' && (
