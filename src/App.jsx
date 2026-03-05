@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import TypeDiagnose from './components/TypeDiagnose.jsx'
 import TypeIntroduction from './components/TypeIntroduction.jsx'
-import SpendSpeed from './components/SpendSpeed.jsx'
 import RealityCompare from './components/RealityCompare.jsx'
 import './App.css'
 
@@ -51,13 +50,6 @@ function App() {
         </button>
         <button
           type="button"
-          className={`nav-tab ${selectedView === 'speed' ? 'nav-tab--active' : ''}`}
-          onClick={() => setSelectedView('speed')}
-        >
-          消費スピード
-        </button>
-        <button
-          type="button"
           className={`nav-tab ${selectedView === 'compare' ? 'nav-tab--active' : ''}`}
           onClick={() => setSelectedView('compare')}
         >
@@ -70,7 +62,7 @@ function App() {
           <div>
             <div className="home-hero">
               <span className="home-hero-eyebrow">Main Feature</span>
-              <div className="home-hero-display">¥100億円</div>
+              <div className="home-hero-display">100億円</div>
               <h2>あなたならどう使う？</h2>
               <p>
                 3つの質問に答えるだけで、あなたの「100億円タイプ」が判明します。
@@ -88,16 +80,6 @@ function App() {
             <div className="home-sub-section fade-in">
               <p className="home-sub-label">Other Modes</p>
               <div className="home-sub-cards">
-                <div
-                  className="home-sub-card"
-                  onClick={() => setSelectedView('speed')}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => e.key === 'Enter' && setSelectedView('speed')}
-                >
-                  <h3>100億円 消費スピード体験</h3>
-                  <p>毎秒10万円使ったら、何年で無くなる？</p>
-                </div>
                 <div
                   className="home-sub-card"
                   onClick={() => setSelectedView('compare')}
@@ -122,10 +104,6 @@ function App() {
             scrollToType={scrollToType}
             onScrollDone={handleScrollDone}
           />
-        )}
-
-        {selectedView === 'speed' && (
-          <SpendSpeed />
         )}
 
         {selectedView === 'compare' && (

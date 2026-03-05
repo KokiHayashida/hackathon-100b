@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { questions } from '../data/questions.js'
 import { TYPE_PROFILES } from '../data/typeProfiles.js'
 import { TYPE_COMBINATION } from '../data/typeCombination.js'
 import { calculateScores, getTypeCode } from '../utils/diagnoseLogic.js'
+import { getTypeImagePath } from '../utils/typeImagePath.js'
+import { getXShareUrl } from '../utils/shareUtils.js'
 
 const SCALE_LABELS = {
   1: '全くそう思わない',
@@ -20,15 +22,68 @@ export default function TypeDiagnose({ onNavigateToType }) {
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [copied, setCopied] = useState(false)
   const [isDiagnosing, setIsDiagnosing] = useState(false)
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const formContainerRef = useRef(null)
 
   const answeredCount = Object.keys(answers).length
   const progressPercent = (answeredCount / questions.length) * 100
+
+  useEffect(() => {
+    const container = formContainerRef.current
+    if (!container) return
+    const blocks = container.querySelectorAll('[data-question-index]')
+    if (blocks.length === 0) return
+
+    const updateActiveIndex = () => {
+      const viewportHeight = window.innerHeight
+      const viewportCenter = viewportHeight * 0.4
+      let bestIndex = 0
+      let bestDistance = Infinity
+
+      blocks.forEach((el) => {
+        const rect = el.getBoundingClientRect()
+        const blockCenter = rect.top + rect.height / 2
+        const distance = Math.abs(blockCenter - viewportCenter)
+        if (distance < bestDistance) {
+          bestDistance = distance
+          bestIndex = parseInt(el.getAttribute('data-question-index'), 10)
+        }
+      })
+      setCurrentQuestionIndex(bestIndex)
+    }
+
+    updateActiveIndex()
+
+    const observer = new IntersectionObserver(
+      () => updateActiveIndex(),
+      { root: null, rootMargin: '0px', threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] }
+    )
+    blocks.forEach((el) => observer.observe(el))
+
+    const handleScroll = () => {
+      requestAnimationFrame(updateActiveIndex)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [result])
 
   const handleChange = (questionId, value) => {
     setAnswers((prev) => ({
       ...prev,
       [questionId]: value,
     }))
+    const currentIndex = questions.findIndex((q) => q.id === questionId)
+    const nextIndex = currentIndex + 1
+    if (nextIndex < questions.length) {
+      requestAnimationFrame(() => {
+        const nextEl = document.querySelector(`[data-question-index="${nextIndex}"]`)
+        nextEl?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      })
+    }
   }
 
   const handleSubmit = (event) => {
@@ -77,6 +132,16 @@ export default function TypeDiagnose({ onNavigateToType }) {
     })
   }
 
+  const handleShareToX = () => {
+    if (!result) return
+    window.open(getXShareUrl(result), '_blank', 'noopener,noreferrer,width=550,height=420')
+  }
+
+  const handleMeterClick = (index) => {
+    const el = formContainerRef.current?.querySelector(`[data-question-index="${index}"]`)
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   if (isDiagnosing) {
     return (
       <section className="view-card fade-in">
@@ -96,6 +161,11 @@ export default function TypeDiagnose({ onNavigateToType }) {
           <p className="result-card-label">Your Type</p>
           <h3>{result.name}</h3>
           <p className="result-type-code">{result.typeCode}</p>
+          <img
+            src={getTypeImagePath(result.typeCode)}
+            alt={`${result.name}のイメージ`}
+            className="result-type-image"
+          />
           <hr className="result-card-divider" />
           <p className="result-feature">{result.feature}</p>
           {result.strengths && result.strengths.length > 0 && (
@@ -147,6 +217,13 @@ export default function TypeDiagnose({ onNavigateToType }) {
             >
               {copied ? '✓ コピーしました' : '結果をコピー'}
             </button>
+            <button
+              type="button"
+              className="share-x-button"
+              onClick={handleShareToX}
+            >
+              Xで共有
+            </button>
             <button type="button" className="secondary-button" onClick={handleReset}>
               もう一度診断する
             </button>
@@ -175,9 +252,19 @@ export default function TypeDiagnose({ onNavigateToType }) {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="diagnose-form">
-        {questions.map((question, index) => (
-          <div key={question.id} className="question-block">
+      <div className="diagnose-body">
+        <form ref={formContainerRef} onSubmit={handleSubmit} className="diagnose-form">
+          {questions.map((question, index) => {
+          const currentQuestionIndex = questions.findIndex((q) => answers[q.id] == null || answers[q.id] === '')
+          const isCurrent = currentQuestionIndex === index
+          const isDimmed = currentQuestionIndex >= 0 && !isCurrent
+          return (
+          <div
+            key={question.id}
+            data-question-index={index}
+            id={`question-${question.id}`}
+            className={`question-block ${isCurrent ? 'question-block--current' : ''} ${isDimmed ? 'question-block--dimmed' : ''}`}
+          >
             <p className="question-number">Q{index + 1}</p>
             <p className="question-text">{question.text}</p>
             <div className="question-options">
@@ -224,11 +311,29 @@ export default function TypeDiagnose({ onNavigateToType }) {
               )}
             </div>
           </div>
-        ))}
+          )
+        })}
 
         {hasSubmitted && !result && (
           <p className="validation-message">すべての質問に回答してください。</p>
         )}
+
+        <nav className="question-meter question-meter--inline" aria-label="設問ナビゲーション">
+          {questions.map((_, index) => {
+            const isAnswered = answers[questions[index].id] != null && answers[questions[index].id] !== ''
+            const isActive = currentQuestionIndex === index
+            return (
+              <button
+                key={index}
+                type="button"
+                className={`question-meter-dot ${isAnswered ? 'question-meter-dot--answered' : ''} ${isActive ? 'question-meter-dot--active' : ''}`}
+                onClick={() => handleMeterClick(index)}
+                aria-label={`Q${index + 1}へ移動`}
+                title={`Q${index + 1}`}
+              />
+            )
+          })}
+        </nav>
 
         <div className="form-actions">
           <button type="submit" className="primary-button">
@@ -239,6 +344,24 @@ export default function TypeDiagnose({ onNavigateToType }) {
           </button>
         </div>
       </form>
+
+        <nav className="question-meter" aria-label="設問ナビゲーション">
+          {questions.map((_, index) => {
+            const isAnswered = answers[questions[index].id] != null && answers[questions[index].id] !== ''
+            const isActive = currentQuestionIndex === index
+            return (
+              <button
+                key={index}
+                type="button"
+                className={`question-meter-dot ${isAnswered ? 'question-meter-dot--answered' : ''} ${isActive ? 'question-meter-dot--active' : ''}`}
+                onClick={() => handleMeterClick(index)}
+                aria-label={`Q${index + 1}へ移動`}
+                title={`Q${index + 1}`}
+              />
+            )
+          })}
+        </nav>
+      </div>
     </section>
   )
 }
