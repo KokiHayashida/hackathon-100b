@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { questions } from '../data/questions.js'
 import { TYPE_PROFILES } from '../data/typeProfiles.js'
+import { TYPE_COMBINATION } from '../data/typeCombination.js'
 import { calculateScores, getTypeCode } from '../utils/diagnoseLogic.js'
 
 const SCALE_LABELS = {
@@ -13,7 +14,7 @@ const SCALE_LABELS = {
 
 const DIAGNOSE_DELAY_MS = 2000
 
-export default function TypeDiagnose() {
+export default function TypeDiagnose({ onNavigateToType }) {
   const [answers, setAnswers] = useState({})
   const [result, setResult] = useState(null)
   const [hasSubmitted, setHasSubmitted] = useState(false)
@@ -88,6 +89,7 @@ export default function TypeDiagnose() {
   }
 
   if (result) {
+    const combo = TYPE_COMBINATION[result.typeCode]
     return (
       <section className="view-card fade-in">
         <div className={`result-card ${result.colorClass}`}>
@@ -116,7 +118,28 @@ export default function TypeDiagnose() {
               </ul>
             </div>
           )}
+          {combo && (
+            <div className="result-details result-compatibility">
+              <p className="result-compat-item">
+                <span className="result-compat-label">最高の相性：</span>
+                {combo.best.code} {combo.best.name}
+              </p>
+              <p className="result-compat-item">
+                <span className="result-compat-label">最悪の相性：</span>
+                {combo.worst.code} {combo.worst.name}
+              </p>
+            </div>
+          )}
           <div className="result-actions">
+            {onNavigateToType && (
+              <button
+                type="button"
+                className="primary-button"
+                onClick={() => onNavigateToType(result.typeCode)}
+              >
+                診断結果をさらに分析する →
+              </button>
+            )}
             <button
               type="button"
               className={`copy-button${copied ? ' copy-button--copied' : ''}`}
