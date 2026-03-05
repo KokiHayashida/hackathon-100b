@@ -415,7 +415,22 @@ html {
   border-radius: var(--radius-md);
   background-color: var(--surface-1);
   border: 1px solid var(--border);
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, opacity 0.25s ease;
+}
+
+.question-block--dimmed {
+  opacity: 0.55;
+}
+
+.question-block--current {
+  opacity: 1;
+  border-left: 4px solid var(--accent);
+  background-color: var(--accent-subtle);
+  box-shadow: 0 0 0 1px rgba(232, 162, 25, 0.15);
+}
+
+.question-block--current .question-number {
+  color: var(--accent);
 }
 
 .question-number {
@@ -424,17 +439,8 @@ html {
   letter-spacing: 0.1em;
   margin: 0 0 0.6rem;
   text-transform: uppercase;
+  color: var(--text-muted);
 }
-
-/* Q1/Q2/Q3 それぞれに固有色 (番号 + ブロック左ボーダー) */
-.diagnose-form .question-block:nth-child(1) .question-number { color: var(--teal); }
-.diagnose-form .question-block:nth-child(1) { border-left: 3px solid var(--teal); }
-
-.diagnose-form .question-block:nth-child(2) .question-number { color: var(--blue); }
-.diagnose-form .question-block:nth-child(2) { border-left: 3px solid var(--blue); }
-
-.diagnose-form .question-block:nth-child(3) .question-number { color: var(--purple); }
-.diagnose-form .question-block:nth-child(3) { border-left: 3px solid var(--purple); }
 
 .question-text {
   margin: 0 0 1.1rem;
@@ -474,32 +480,6 @@ html {
   border-color: var(--accent);
   background-color: var(--accent-subtle);
   color: var(--text-primary);
-}
-
-/* 各質問の選択状態を番号色に連動 */
-.diagnose-form .question-block:nth-child(1) .option-label--selected {
-  border-color: var(--teal);
-  background-color: var(--teal-subtle);
-}
-.diagnose-form .question-block:nth-child(1) .option-label input[type='radio']:checked {
-  border-color: var(--teal);
-  box-shadow: inset 0 0 0 3px var(--teal);
-}
-.diagnose-form .question-block:nth-child(2) .option-label--selected {
-  border-color: var(--blue);
-  background-color: var(--blue-subtle);
-}
-.diagnose-form .question-block:nth-child(2) .option-label input[type='radio']:checked {
-  border-color: var(--blue);
-  box-shadow: inset 0 0 0 3px var(--blue);
-}
-.diagnose-form .question-block:nth-child(3) .option-label--selected {
-  border-color: var(--purple);
-  background-color: var(--purple-subtle);
-}
-.diagnose-form .question-block:nth-child(3) .option-label input[type='radio']:checked {
-  border-color: var(--purple);
-  box-shadow: inset 0 0 0 3px var(--purple);
 }
 
 .option-label input[type='radio'] {
@@ -579,11 +559,11 @@ html {
   margin-top: 2.5rem;
   padding: 2.5rem 2rem;
   border-radius: var(--radius-lg);
-  background-color: var(--surface-1);
+  background-color: #0f1d2e;
   border: 1px solid var(--border-strong);
   text-align: center;
   animation: scaleIn 0.6s ease-out both;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.03);
   position: relative;
   overflow: hidden;
 }
@@ -594,7 +574,7 @@ html {
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
+  height: 5px;
   background-color: var(--accent);
 }
 
@@ -680,29 +660,29 @@ html {
 
 /* Result card — type color variants */
 
-.result--teal::before         { background-color: var(--teal); }
+.result--teal::before         { background: linear-gradient(90deg, var(--teal), #3dd4b4); }
 .result--teal h3              { color: var(--teal); }
 .result--teal .copy-button:hover { border-color: var(--teal); }
 
-.result--blue::before         { background-color: var(--blue); }
+.result--blue::before         { background: linear-gradient(90deg, var(--blue), #6bb3e8); }
 .result--blue h3              { color: var(--blue); }
 .result--blue .copy-button:hover { border-color: var(--blue); }
 
-.result--purple::before       { background-color: var(--purple); }
+.result--purple::before       { background: linear-gradient(90deg, var(--purple), #b394f5); }
 .result--purple h3            { color: var(--purple); }
 .result--purple .copy-button:hover { border-color: var(--purple); }
 
-.result--amber::before        { background-color: var(--accent); }
+.result--amber::before        { background: linear-gradient(90deg, var(--accent), #f0b429); }
 .result--amber h3             { color: var(--accent); }
 .result--amber .copy-button:hover { border-color: var(--accent); }
 
 .result--green   .result-card-divider { background-color: var(--emerald); }
-.result--green::before         { background-color: var(--emerald); }
+.result--green::before         { background: linear-gradient(90deg, var(--emerald), #4dd68a); }
 .result--green h3              { color: var(--emerald); }
 .result--green .copy-button:hover { border-color: var(--emerald); }
 
 .result--orange  .result-card-divider { background-color: var(--orange); }
-.result--orange::before        { background-color: var(--orange); }
+.result--orange::before        { background: linear-gradient(90deg, var(--orange), #e89a5c); }
 .result--orange h3             { color: var(--orange); }
 .result--orange .copy-button:hover { border-color: var(--orange); }
 
@@ -899,10 +879,11 @@ html {
 .type-intro-section {
   scroll-margin-top: 1rem;
   padding: 1.5rem 1.25rem;
-  background-color: var(--surface-1);
+  background-color: #0f1d2e;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-md);
-  border-left: 4px solid var(--accent);
+  border-left: 5px solid var(--accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.02);
 }
 
 .type-intro-section.result--teal   { border-left-color: var(--teal); }
@@ -911,6 +892,13 @@ html {
 .type-intro-section.result--amber  { border-left-color: var(--accent); }
 .type-intro-section.result--green  { border-left-color: var(--emerald); }
 .type-intro-section.result--orange { border-left-color: var(--orange); }
+
+.type-intro-section.result--teal   .type-intro-quote { border-left-color: var(--teal); }
+.type-intro-section.result--blue   .type-intro-quote { border-left-color: var(--blue); }
+.type-intro-section.result--purple .type-intro-quote { border-left-color: var(--purple); }
+.type-intro-section.result--amber  .type-intro-quote { border-left-color: var(--accent); }
+.type-intro-section.result--green  .type-intro-quote { border-left-color: var(--emerald); }
+.type-intro-section.result--orange .type-intro-quote { border-left-color: var(--orange); }
 
 .type-intro-section-title {
   margin: 0 0 1rem;
@@ -936,8 +924,9 @@ html {
   font-style: italic;
   color: var(--text-secondary);
   background-color: var(--surface-2);
-  border-left: 3px solid var(--accent);
+  border-left: 4px solid var(--accent);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
 }
 
 .type-intro-content {

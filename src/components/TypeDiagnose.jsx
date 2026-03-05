@@ -30,6 +30,14 @@ export default function TypeDiagnose({ onNavigateToType }) {
       ...prev,
       [questionId]: value,
     }))
+    const currentIndex = questions.findIndex((q) => q.id === questionId)
+    const nextIndex = currentIndex + 1
+    if (nextIndex < questions.length) {
+      requestAnimationFrame(() => {
+        const nextEl = document.getElementById(`question-${questions[nextIndex].id}`)
+        nextEl?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      })
+    }
   }
 
   const handleSubmit = (event) => {
@@ -182,8 +190,16 @@ export default function TypeDiagnose({ onNavigateToType }) {
       </div>
 
       <form onSubmit={handleSubmit} className="diagnose-form">
-        {questions.map((question, index) => (
-          <div key={question.id} className="question-block">
+        {questions.map((question, index) => {
+          const currentQuestionIndex = questions.findIndex((q) => answers[q.id] == null || answers[q.id] === '')
+          const isCurrent = currentQuestionIndex === index
+          const isDimmed = currentQuestionIndex >= 0 && !isCurrent
+          return (
+          <div
+            key={question.id}
+            id={`question-${question.id}`}
+            className={`question-block ${isCurrent ? 'question-block--current' : ''} ${isDimmed ? 'question-block--dimmed' : ''}`}
+          >
             <p className="question-number">Q{index + 1}</p>
             <p className="question-text">{question.text}</p>
             <div className="question-options">
@@ -230,7 +246,8 @@ export default function TypeDiagnose({ onNavigateToType }) {
               )}
             </div>
           </div>
-        ))}
+          )
+        })}
 
         {hasSubmitted && !result && (
           <p className="validation-message">すべての質問に回答してください。</p>
